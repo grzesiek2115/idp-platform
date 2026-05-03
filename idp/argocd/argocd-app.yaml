@@ -1,16 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    notifications.argoproj.io/subscribe.on-sync.gitlab: ""
   name: argocd
+  namespace: argocd
 spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argocd
+    path: argocd/argocd-bootstrap
     repoURL: https://github.com/grzesiek2115/idp-platform.git
     targetRevision: main
   syncPolicy:

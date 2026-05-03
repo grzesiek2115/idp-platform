@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: idp
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.io
+spec:
+  description: IDP platform — infrastructure components
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: '*'
+      server: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
