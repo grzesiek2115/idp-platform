@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argocd/argocd-bootstrap
+    path: idp/argocd/argocd-bootstrap
     repoURL: https://github.com/grzesiek2115/idp-platform.git
     targetRevision: main
   syncPolicy:
