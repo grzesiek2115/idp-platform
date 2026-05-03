@@ -1,0 +1,15 @@
+repoURL: https://kubernetes.github.io/ingress-nginx
+chart: ingress-nginx
+targetRevision: 4.15.1
+values: |
+  controller:
+    hostPort:
+      enabled: true
+    nodeSelector:
+      ingress-ready: "true"
+    tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+    service:
+      type: NodePort

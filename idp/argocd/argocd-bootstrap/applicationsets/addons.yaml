@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: addons
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/grzesiek2115/idp-platform.git
+        revision: main
+        files:
+          - path: idp/argocd/addons/*.yaml
+  template:
+    metadata:
+      name: '{{ .path.basename }}'
+    spec:
+      project: idp
+      source:
+        repoURL: '{{.repoURL}}'
+        targetRevision: '{{.targetRevision}}'
+        chart: '{{.chart}}'
+        helm:
+          values: |-
+            {{ .values }}
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ .path.basename }}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+          allowEmpty: true
+        syncOptions:
+        - Validate=true
+        - CreateNamespace=true
+        - PrunePropagationPolicy=foreground
+        - ApplyOutOfSyncOnly=true
+        - PruneLast=true
+        retry:
+          limit: 2
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 2m
