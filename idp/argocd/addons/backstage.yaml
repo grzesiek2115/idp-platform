@@ -1,0 +1,23 @@
+repoURL: https://backstage.github.io/charts
+chart: backstage
+targetRevision: 2.7.0
+values: |
+  backstage:
+    appConfig:
+      app:
+        title: IDP Platform
+        baseUrl: http://backstage.idp.local:8080
+      backend:
+        baseUrl: http://backstage.idp.local:8080
+        database:
+          client: pg
+          connection:
+            host: postgresql.postgresql.svc.cluster.local
+            port: 5432
+            user: backstage
+            password: backstage
+            database: backstage
+  ingress:
+    enabled: true
+    className: nginx
+    host: backstage.idp.local
