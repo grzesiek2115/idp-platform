@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: argocd.idp.local
+    - host: argocd.idp.local # It requires to add argocd.idp.local to /etc/hosts
       http:
         paths:
           - path: /
