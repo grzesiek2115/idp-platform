@@ -6,9 +6,9 @@ values: |
     appConfig:
       app:
         title: IDP Platform
-        baseUrl: http://backstage.idp.local:7007
+        baseUrl: http://backstage.idp.local:8080
       backend:
-        baseUrl: http://backstage.idp.local:7007
+        baseUrl: http://backstage.idp.local:8080
         database:
           client: pg
           connection:
